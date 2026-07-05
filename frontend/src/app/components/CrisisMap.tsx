@@ -26,11 +26,13 @@ interface GroupedCluster {
   reportCount: number;
 }
 
+// 🟢 SMART RECENTER: Prevents jumping to the middle of the ocean if inputs are erased
 function MapRecenter({ center }: { center: [number, number] }) {
   const map = useMap();
   useEffect(() => {
+    if (center[0] === 0 && center[1] === 0) return; // Ignore empty/fallback inputs
     map.setView(center, map.getZoom());
-  }, [center]);
+  }, [center, map]);
   return null;
 }
 
