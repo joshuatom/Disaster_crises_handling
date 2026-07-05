@@ -37,7 +37,7 @@ interface GroupedCluster {
 }
 
 export default function CrisisDashboard() {
-  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+  const BACKEND_URL =  'https://disaster-crises-handling.onrender.com';
 
   const [reports, setReports] = useState<Report[]>([]);
   const [inputText, setInputText] = useState("");
