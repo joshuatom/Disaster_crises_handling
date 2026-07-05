@@ -114,7 +114,12 @@ export default function CrisisDashboard() {
   };
 
   const groupedData = getGroupedClusters();
-  const currentMapCenter: [number, number] = [parseFloat(lat), parseFloat(lng)];
+
+  // 🟢 CRITICAL HOTFIX: Bulletproof parsing bounds block.
+  // Prevents empty field string wipes from breaking Leaflet engine components with NaN.
+  const safeLat = !lat || isNaN(parseFloat(lat)) ? 37.7749 : parseFloat(lat);
+  const safeLng = !lng || isNaN(parseFloat(lng)) ? -122.4194 : parseFloat(lng);
+  const currentMapCenter: [number, number] = [safeLat, safeLng];
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-[#1f1410] via-[#2b1b12] to-[#1a1310] text-amber-50 font-sans antialiased selection:bg-orange-500/30 selection:text-orange-100 transition-colors duration-500">
